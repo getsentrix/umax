@@ -1,0 +1,329 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Umax — Looksmax AI</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Umax is a looksmax AI that analyzes a selfie to rate facial attractiveness and provide glow‑up suggestions, with results gated by subscription and extra scans as add-ons." />
+  <style>
+    :root {
+      --bg: #0c0f14;
+      --fg: #eef2f7;
+      --muted: #b9c2cf;
+      --brand: #5ef0c1;
+      --accent: #87a5ff;
+      --card: #131822;
+      --chip: #1b2330;
+      --danger: #ff7171;
+      --ok: #6dfcb3;
+      --warn: #ffd166;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; background: var(--bg); color: var(--fg); font-family: system-ui, -apple-system, Segoe UI, Roboto, Inter, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji"; }
+    a { color: var(--brand); text-decoration: none; }
+    header {
+      position: sticky; top: 0; z-index: 40;
+      background: rgba(12,15,20,0.7); backdrop-filter: blur(12px); border-bottom: 1px solid #222a38;
+    }
+    .wrap { max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+    nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+    .logo { display: flex; gap: 10px; align-items: center; font-weight: 700; letter-spacing: 0.2px; }
+    .logo-badge { width: 28px; height: 28px; border-radius: 8px; background: linear-gradient(135deg, var(--brand), var(--accent)); box-shadow: 0 0 22px rgba(94,240,193,0.3); }
+    .nav-links { display: flex; gap: 16px; }
+    .nav-links a { color: var(--muted); font-weight: 600; }
+    .cta {
+      background: linear-gradient(135deg, var(--brand), var(--accent));
+      color: #0b0e13; padding: 10px 14px; font-weight: 800; border-radius: 10px; box-shadow: 0 6px 24px rgba(94,240,193,0.25);
+    }
+
+    .hero {
+      padding: 64px 0 28px;
+      background:
+        radial-gradient(1200px 260px at 50% -40px, rgba(94,240,193,0.12), transparent 60%),
+        radial-gradient(1000px 240px at 30% -120px, rgba(135,165,255,0.12), transparent 60%);
+      border-bottom: 1px solid #1b2330;
+    }
+    .hero-grid {
+      display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 28px; align-items: center;
+    }
+    .title { font-size: 44px; line-height: 1.05; margin: 0 0 12px; }
+    .sub { color: var(--muted); margin: 0 0 16px; font-size: 18px; }
+    .chips { display: flex; gap: 10px; flex-wrap: wrap; margin: 16px 0 24px; }
+    .chip { padding: 8px 12px; border-radius: 999px; background: var(--chip); color: var(--muted); font-weight: 600; border: 1px solid #273145; }
+
+    .card {
+      background: linear-gradient(180deg, #121723, #0e131d);
+      border: 1px solid #283449;
+      border-radius: 16px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+    }
+    .phone {
+      aspect-ratio: 9/19.5; border-radius: 26px; border: 10px solid #0b0f16; background: #0f1520; position: relative; overflow: hidden;
+    }
+    .scan-ui { position: absolute; inset: 0; display: grid; place-items: center; padding: 18px; }
+    .frame { width: 82%; aspect-ratio: 1; border-radius: 26px; border: 2px dashed rgba(135,165,255,0.6); display: grid; place-items: center; color: var(--muted); }
+    .frame small { display: block; margin-top: 8px; color: var(--muted); }
+    .knob {
+      position: absolute; bottom: 16px; left: 50%; transform: translateX(-50%);
+      padding: 10px 16px; border-radius: 12px; background: linear-gradient(135deg, var(--brand), var(--accent)); color: #0b0e13; font-weight: 800;
+      box-shadow: 0 8px 28px rgba(135,165,255,0.18);
+    }
+
+    section { padding: 36px 0; }
+    h2 { font-size: 22px; margin: 0 0 12px; }
+    p { color: var(--muted); margin: 10px 0; }
+    ul { margin: 10px 0 0 0; padding: 0 0 0 18px; color: var(--muted); }
+    li { margin: 8px 0; }
+    .grid { display: grid; gap: 16px; grid-template-columns: repeat(3, 1fr); }
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .panel { padding: 18px; border-radius: 14px; background: var(--card); border: 1px solid #283449; }
+
+    .pricing { display: grid; gap: 16px; grid-template-columns: repeat(3, 1fr); }
+    .price-card { padding: 18px; border-radius: 14px; background: linear-gradient(180deg, #111723, #0e131d); border: 1px solid #2b3750; }
+    .price { font-size: 28px; font-weight: 800; margin: 8px 0; color: var(--ok); }
+    .warn { color: var(--warn); }
+    .danger { color: var(--danger); }
+
+    .disclaimer { margin-top: 12px; padding: 12px 14px; background: #141a26; border: 1px dashed #2b3750; border-radius: 12px; color: var(--muted); }
+
+    footer { padding: 28px 0 42px; color: var(--muted); border-top: 1px solid #1b2330; }
+    .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace; }
+    @media (max-width: 980px) {
+      .hero-grid { grid-template-columns: 1fr; }
+      .grid, .pricing, .grid-2 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <nav>
+        <div class="logo"><div class="logo-badge"></div><span>Umax</span></div>
+        <div class="nav-links">
+          <a href="#overview">Overview</a>
+          <a href="#platforms">Platforms</a>
+          <a href="#features">Features</a>
+          <a href="#pricing">Pricing</a>
+          <a href="#privacy">Privacy</a>
+          <a href="#legal">Legal</a>
+        </div>
+        <a class="cta" href="#get-started">Get Started</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <h1 class="title">Analyze your selfie, get glow‑up guidance, and track progress</h1>
+          <p class="sub">Umax is a looksmax AI that rates facial attractiveness and returns improvement suggestions, with detailed results gated behind a subscription and extra scans sold as add‑ons [web:1].</p>
+          <div class="chips">
+            <div class="chip">Three‑step flow [web:1]</div>
+            <div class="chip">Group scanning v1.4.3 [web:1]</div>
+            <div class="chip">Not medical advice [web:1]</div>
+            <div class="chip">Privacy controls [web:9]</div>
+          </div>
+          <div id="get-started" class="card panel">
+            <h2>Start in 3 steps</h2>
+            <ul>
+              <li>Download the app [web:1]</li>
+              <li>Take a selfie [web:1]</li>
+              <li>Receive analysis suggestions (paywalled results) [web:1]</li>
+            </ul>
+            <div class="disclaimer">Note: Recommendations are suggestions only and not medical advice; consult professionals before new interventions [web:1].</div>
+          </div>
+        </div>
+        <div class="card">
+          <div class="phone">
+            <div class="scan-ui">
+              <div class="frame">
+                <div>
+                  <div style="text-align:center;font-weight:800">Face in frame</div>
+                  <small>Neutral expression • Even lighting • Frontal pose [web:1]</small>
+                </div>
+              </div>
+              <button class="knob">Scan group (v1.4.3) [web:1]</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="overview">
+      <div class="wrap grid-2">
+        <div class="panel">
+          <h2>Overview</h2>
+          <p>Umax positions itself as a looksmax AI for facial attractiveness analysis and glow‑up advice, guiding a self‑improvement journey via selfie input and AI‑generated feedback [web:1].</p>
+          <p>The listing emphasizes a simple flow—download, take a selfie, get analysis—while clarifying that analysis results require a subscription and additional scans may require separate purchase, alongside a non‑medical‑advice disclaimer [web:1].</p>
+        </div>
+        <div class="panel">
+          <h2>Core user flow</h2>
+          <ul>
+            <li>Onboard to a three‑step process: download → selfie → analysis suggestions [web:1]</li>
+            <li>Results are paywalled by subscription; extra scans may be separate in‑app purchases [web:1]</li>
+            <li>Version 1.4.3 adds group scanning for multi‑face analysis [web:1]</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="platforms">
+      <div class="wrap grid">
+        <div class="panel">
+          <h2>Platforms</h2>
+          <p>Supports iPhone and iPod touch on iOS 13.4+, Macs with Apple silicon on macOS 11+, and Apple Vision on visionOS 1.0+ [web:1].</p>
+          <p>English language, Lifestyle category, seller Improvement Tech LLC, approximate download size 59.8 MB on iOS [web:1].</p>
+        </div>
+        <div class="panel">
+          <h2>Feature set</h2>
+          <ul>
+            <li>Selfie‑based facial rating with looksmax suggestions framed as non‑medical [web:1]</li>
+            <li>Focus on facial attractiveness today with plans to expand scope and a contact email for ideas [web:1]</li>
+            <li>Group scanning added in v1.4.3 for multiple subjects per session [web:1]</li>
+          </ul>
+        </div>
+        <div class="panel">
+          <h2>Recent changes</h2>
+          <p>What’s New explicitly notes “Added new group scanning!” in version 1.4.3 [web:1].</p>
+          <p>Other change details are not specified publicly beyond group scanning; I don’t know [web:1].</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="pricing">
+      <div class="wrap">
+        <h2>Monetization and pricing</h2>
+        <div class="pricing">
+          <div class="price-card">
+            <div class="mono">Weekly Premium</div>
+            <div class="price">$3.99–$9.99</div>
+            <p>Multiple weekly tiers are visible in the App Store in‑app purchases list [web:1].</p>
+            <p class="warn">Analysis results require a subscription per the listing [web:1].</p>
+          </div>
+          <div class="price-card">
+            <div class="mono">Monthly Premium</div>
+            <div class="price">$9.99–$24.99</div>
+            <p>Monthly tiers are listed with varying price points aligning to entitlements [web:1].</p>
+            <p class="warn">Extra scans may be separate purchases beyond subscription [web:1].</p>
+          </div>
+          <div class="price-card">
+            <div class="mono">Add‑Ons</div>
+            <div class="price">$3.99–$6.99</div>
+            <p>One‑offs like “Supercharge” and “You as a 10/10” appear among IAP SKUs [web:1].</p>
+            <p class="danger">User reviews mention per‑scan charges and expectations under weekly plans are inconsistent, but these are anecdotal [web:1].</p>
+          </div>
+        </div>
+        <div class="disclaimer">Store copy states: “analysis results require subscription” and “Additional scans require additional purchase,” matching multiple recurring and one‑off SKUs [web:1].</div>
+      </div>
+    </section>
+
+    <section id="privacy">
+      <div class="wrap grid-2">
+        <div class="panel">
+          <h2>Privacy and data</h2>
+          <p>App Store labels indicate Usage Data may be used to track across apps and websites, while User Content and Usage Data may be collected but not linked to identity [web:1].</p>
+          <p>The posted privacy policy states selfies and biometric data may be processed, camera access and push notifications may be requested, and face scans may be retained for up to one year to provide access to prior results, with no data received from third parties [web:9].</p>
+        </div>
+        <div class="panel">
+          <h2>Sharing and rights</h2>
+          <p>Data may be shared with processors such as analytics and storage providers, and the policy includes regional rights sections (e.g., GDPR and CCPA) with contact methods and minor‑use restrictions [web:9].</p>
+          <p>The policy notes in‑app privacy controls and DSAR processes for export/delete requests in line with the described rights framework [web:9].</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="legal">
+      <div class="wrap grid-2">
+        <div class="panel">
+          <h2>Legal and ownership</h2>
+          <p>Seller is Improvement Tech LLC per the App Store, with legal terms linked from the listing and hosted under the developer’s properties [web:1].</p>
+          <p>The terms clarify that Umax services are operated by Improvement Tech LLC with standard agreement provisions and contact methods [web:18].</p>
+        </div>
+        <div class="panel">
+          <h2>Disclaimer</h2>
+          <p>The listing reiterates that recommendations are suggestions only and not medical advice, advising consultation with professionals for novel interventions [web:1].</p>
+          <p>Marketing language positions the tool for looksmax use cases and glow‑up guidance without claiming clinical outcomes [web:1].</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="feedback">
+      <div class="wrap grid-2">
+        <div class="panel">
+          <h2>User feedback and risks</h2>
+          <p>Some reviews report crashes and unstable navigation, suggesting attention to lifecycle and error handling in any rebuild [web:1].</p>
+          <p>Reviewers mention variability in repeated scoring on identical photos, indicating a need for deterministic preprocessing and inference control to improve reproducibility [web:1].</p>
+        </div>
+        <div class="panel">
+          <h2>Engineering blueprint</h2>
+          <ul>
+            <li>On‑device CV: Use Apple Vision for robust face detection and tracking where appropriate [web:33].</li>
+            <li>Landmarks and geometry: Use VNDetectFaceLandmarksRequest with VNFaceLandmarks2D for contours, eyes, brows, nose, and lips to compute symmetry and proportions [web:21].</li>
+            <li>Landmark regions: Normalize with VNFaceLandmarks2D regions for consistent per‑face metrics [web:36].</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="ux">
+      <div class="wrap grid-2">
+        <div class="panel">
+          <h2>Suggested UX flows</h2>
+          <p>Capture overlay with quality gating (frontal pose, lighting, neutral expression) improves repeatability and trust pre‑analysis [web:1].</p>
+          <p>Pipeline: alignment → landmark extraction → engineered ratios → scoring and templated suggestions to align with glow‑up positioning [web:21].</p>
+        </div>
+        <div class="panel">
+          <h2>Access control</h2>
+          <p>Subscription entitlement gates analysis results while additional scans are consumables or distinct IAPs to mirror the listing model [web:1].</p>
+          <p>Consider group scanning limits or an add‑on to align with newly advertised capability in v1.4.3 [web:1].</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="compliance">
+      <div class="wrap grid-2">
+        <div class="panel">
+          <h2>Data handling</h2>
+          <p>Implement selfie and biometric processing with explicit consent, optional camera permission, and storage of scans/results with maximum one‑year retention accessible in account history [web:9].</p>
+          <p>Limit third‑party sharing to processors and align App Store labels to tracking of Usage Data and collection of non‑linked User Content/Usage Data [web:1].</p>
+        </div>
+        <div class="panel">
+          <h2>Reliability</h2>
+          <p>Stabilize pre/post‑processing and cache per‑image embeddings to minimize score variance on identical inputs and ensure idempotent retests [web:1].</p>
+          <p>Harden camera lifecycle, memory use, and inference timeouts with user‑visible progress and fallbacks to address reported crashes [web:1].</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="unknowns">
+      <div class="wrap">
+        <div class="panel">
+          <h2>Unknowns and assumptions</h2>
+          <p>The exact ML models, training data, and scoring criteria used by Umax are not publicly disclosed; I don’t know [web:1].</p>
+          <p>The precise SKU entitlement mapping (e.g., scan counts or weekly limits) is not fully specified publicly beyond the subscription + extra scans model; I don’t know [web:1].</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="cta">
+      <div class="wrap">
+        <div class="panel">
+          <h2>Try Umax</h2>
+          <p>Begin with the core selfie flow, preview a teaser, then subscribe to unlock detailed analysis and purchase extra scans as needed [web:1].</p>
+          <p>Questions or ideas can be sent to the listed contact email as noted in the store listing and privacy policy [web:1].</p>
+          <div class="disclaimer">Medical disclaimer: Suggestions are not medical advice; consult qualified professionals before any new interventions [web:1].</div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div>© Improvement Tech LLC — Umax product information and disclosures summarized from the App Store listing and developer privacy policy [web:1][web:9].</div>
+      <div>Terms are provided by the developer under their hosted properties and linked from the App Store listing [web:1][web:18].</div>
+      <div class="mono" style="margin-top:10px">Engineering note: Apple Vision references — VNDetectFaceLandmarksRequest and VNFaceLandmarks2D — for landmarking and geometry [web:21][web:36].</div>
+    </div>
+  </footer>
+</body>
+</html>
