@@ -12,149 +12,198 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', Roboto, sans-serif;
             background: #0a0a0a;
             color: #ffffff;
-            line-height: 1.4;
+            line-height: 1.3;
             overflow-x: hidden;
         }
 
-        /* Navigation */
+        /* Navigation - Fine-tuned */
         .nav {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(20px);
+            background: rgba(8, 8, 8, 0.95);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
             z-index: 1000;
-            padding: 20px 0;
-            border-bottom: 1px solid #222;
+            padding: 18px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .nav.scrolled {
+            background: rgba(6, 6, 6, 0.98);
+            padding: 12px 0;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
         }
 
         .nav-container {
-            max-width: 1400px;
+            max-width: 1440px;
             margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 40px;
+            padding: 0 32px;
         }
 
         .logo {
             font-size: 32px;
             font-weight: 900;
-            background: linear-gradient(45deg, #00ff88, #0088ff);
+            background: linear-gradient(135deg, #00ff88 0%, #0088ff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
+            letter-spacing: -1px;
         }
 
         .nav-links {
             display: flex;
-            gap: 40px;
+            gap: 32px;
             list-style: none;
         }
 
         .nav-links a {
-            color: #ffffff;
+            color: rgba(255, 255, 255, 0.8);
             text-decoration: none;
             font-weight: 600;
-            font-size: 16px;
-            transition: color 0.3s;
+            font-size: 15px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(135deg, #00ff88, #0088ff);
+            transition: width 0.3s ease;
         }
 
         .nav-links a:hover {
-            color: #00ff88;
+            color: #ffffff;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
         }
 
         .cta-nav {
-            background: linear-gradient(45deg, #00ff88, #0088ff);
+            background: linear-gradient(135deg, #00ff88 0%, #0088ff 100%);
             color: #000;
-            padding: 15px 30px;
-            border-radius: 50px;
+            padding: 12px 24px;
+            border-radius: 24px;
             text-decoration: none;
             font-weight: 800;
-            font-size: 16px;
-            transition: transform 0.3s;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 20px rgba(0, 255, 136, 0.3);
         }
 
         .cta-nav:hover {
-            transform: scale(1.05);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 32px rgba(0, 255, 136, 0.4);
         }
 
-        /* Hero Section */
+        /* Hero Section - Enhanced */
         .hero {
             min-height: 100vh;
             display: flex;
             align-items: center;
-            padding-top: 100px;
+            padding-top: 80px;
             background: 
-                radial-gradient(circle at 20% 50%, rgba(0, 255, 136, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(0, 136, 255, 0.1) 0%, transparent 50%),
-                #0a0a0a;
+                radial-gradient(ellipse 800px 600px at 20% 40%, rgba(0, 255, 136, 0.08) 0%, transparent 70%),
+                radial-gradient(ellipse 1000px 800px at 80% 20%, rgba(0, 136, 255, 0.06) 0%, transparent 70%),
+                linear-gradient(180deg, #0a0a0a 0%, #0d0d0d 100%);
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: 
+                radial-gradient(circle at 25% 25%, rgba(255, 255, 255, 0.01) 1px, transparent 1px),
+                radial-gradient(circle at 75% 75%, rgba(255, 255, 255, 0.01) 1px, transparent 1px);
+            background-size: 60px 60px;
+            opacity: 0.5;
         }
 
         .hero-container {
-            max-width: 1400px;
+            max-width: 1440px;
             margin: 0 auto;
-            padding: 0 40px;
+            padding: 0 32px;
             display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
+            grid-template-columns: 1.1fr 0.9fr;
             gap: 80px;
             align-items: center;
+            position: relative;
+            z-index: 1;
         }
 
         .stats-bar {
             display: flex;
-            gap: 60px;
-            margin-bottom: 40px;
-            font-size: 14px;
-            color: #888;
+            gap: 48px;
+            margin-bottom: 32px;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
         }
 
         .stat {
             text-align: center;
+            padding: 8px 0;
         }
 
         .stat-number {
-            font-size: 28px;
+            font-size: 24px;
             font-weight: 900;
             color: #00ff88;
             display: block;
+            line-height: 1;
+            margin-bottom: 4px;
         }
 
         .mega-title {
-            font-size: clamp(60px, 8vw, 120px);
+            font-size: clamp(48px, 7vw, 96px);
             font-weight: 900;
-            line-height: 0.9;
-            margin-bottom: 20px;
+            line-height: 0.85;
+            margin-bottom: 16px;
             text-transform: uppercase;
-            letter-spacing: -2px;
+            letter-spacing: -3px;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
         }
 
         .mega-subtitle {
-            font-size: clamp(40px, 5vw, 80px);
+            font-size: clamp(32px, 5vw, 64px);
             font-weight: 900;
             line-height: 0.9;
-            margin-bottom: 40px;
-            background: linear-gradient(45deg, #00ff88, #0088ff);
+            margin-bottom: 32px;
+            background: linear-gradient(135deg, #00ff88 0%, #0088ff 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             text-transform: uppercase;
+            letter-spacing: -2px;
         }
 
         .features-list {
             list-style: none;
-            margin-bottom: 60px;
-            font-size: 20px;
+            margin-bottom: 40px;
+            font-size: 18px;
             font-weight: 600;
         }
 
         .features-list li {
-            margin-bottom: 15px;
-            padding-left: 30px;
+            margin-bottom: 12px;
+            padding-left: 24px;
             position: relative;
+            color: rgba(255, 255, 255, 0.9);
         }
 
         .features-list li::before {
@@ -163,36 +212,37 @@
             left: 0;
             color: #00ff88;
             font-weight: 900;
-            font-size: 24px;
+            font-size: 20px;
         }
 
         .cta-hero {
-            background: linear-gradient(45deg, #00ff88, #0088ff);
+            background: linear-gradient(135deg, #00ff88 0%, #0088ff 100%);
             color: #000;
-            padding: 25px 50px;
-            border-radius: 50px;
+            padding: 20px 40px;
+            border-radius: 32px;
             text-decoration: none;
             font-weight: 900;
-            font-size: 24px;
+            font-size: 18px;
             text-transform: uppercase;
             letter-spacing: 1px;
-            transition: all 0.3s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: inline-block;
-            box-shadow: 0 20px 40px rgba(0, 255, 136, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 255, 136, 0.4);
         }
 
         .cta-hero:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 30px 60px rgba(0, 255, 136, 0.4);
+            transform: translateY(-4px);
+            box-shadow: 0 16px 48px rgba(0, 255, 136, 0.5);
         }
 
         .guarantee {
-            margin-top: 20px;
-            font-size: 16px;
-            color: #888;
+            margin-top: 16px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            font-weight: 500;
         }
 
-        /* Phone Mockup */
+        /* Phone Mockup - Enhanced */
         .phone-container {
             position: relative;
             display: flex;
@@ -201,404 +251,431 @@
         }
 
         .phone-mockup {
-            width: 350px;
-            height: 700px;
-            background: linear-gradient(145deg, #111, #222);
-            border-radius: 50px;
-            padding: 30px;
+            width: 320px;
+            height: 640px;
+            background: linear-gradient(145deg, #1a1a1a, #0d0d0d);
+            border-radius: 48px;
+            padding: 24px;
             box-shadow: 
-                0 50px 100px rgba(0, 0, 0, 0.5),
-                0 0 100px rgba(0, 255, 136, 0.2);
+                0 32px 64px rgba(0, 0, 0, 0.6),
+                0 0 64px rgba(0, 255, 136, 0.15),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
             position: relative;
-            animation: float 6s ease-in-out infinite;
+            animation: float 8s ease-in-out infinite;
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-8px) rotate(0.5deg); }
+            75% { transform: translateY(-8px) rotate(-0.5deg); }
         }
 
         .phone-screen {
             width: 100%;
             height: 100%;
             background: #000;
-            border-radius: 35px;
+            border-radius: 32px;
             position: relative;
             overflow: hidden;
         }
 
         .scan-interface {
             position: absolute;
-            inset: 40px;
+            inset: 32px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
         }
 
-        .face-scanner {
+        .camera-preview {
             width: 200px;
             height: 200px;
-            border: 3px solid #00ff88;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 40px;
+            margin-bottom: 32px;
             position: relative;
-            animation: scanPulse 2s infinite;
+            overflow: hidden;
+            background: #111;
+        }
+
+        .camera-preview video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .face-scanner {
+            position: absolute;
+            inset: 0;
+            border: 3px solid #00ff88;
+            border-radius: 50%;
+            animation: scanPulse 2.5s infinite;
         }
 
         @keyframes scanPulse {
             0%, 100% { 
-                box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.7);
+                box-shadow: 0 0 0 0 rgba(0, 255, 136, 0.8);
+                border-color: #00ff88;
             }
             50% { 
-                box-shadow: 0 0 0 20px rgba(0, 255, 136, 0);
+                box-shadow: 0 0 0 16px rgba(0, 255, 136, 0);
+                border-color: #0088ff;
             }
         }
 
-        .face-scanner::after {
-            content: "👤";
-            font-size: 60px;
+        .placeholder-face {
+            font-size: 48px;
             opacity: 0.3;
+            color: #666;
         }
 
         .scan-text {
             text-align: center;
-            margin-bottom: 30px;
+            margin-bottom: 24px;
             color: #fff;
-        }
-
-        .scan-btn {
-            background: linear-gradient(45deg, #00ff88, #0088ff);
-            color: #000;
-            border: none;
-            padding: 15px 30px;
-            border-radius: 25px;
-            font-weight: 800;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .scan-btn:hover {
-            transform: scale(1.1);
-        }
-
-        /* Stats Section */
-        .stats-section {
-            padding: 120px 0;
-            background: #111;
-            text-align: center;
-        }
-
-        .stats-grid {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 60px;
-            padding: 0 40px;
-        }
-
-        .big-stat {
-            font-size: 80px;
-            font-weight: 900;
-            color: #00ff88;
-            line-height: 1;
-            margin-bottom: 10px;
-        }
-
-        .stat-label {
-            font-size: 18px;
-            color: #888;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        /* Mission Section */
-        .mission-section {
-            padding: 120px 0;
-            text-align: center;
-        }
-
-        .mission-container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 0 40px;
-        }
-
-        .mission-title {
-            font-size: 60px;
-            font-weight: 900;
-            margin-bottom: 40px;
-            text-transform: uppercase;
-        }
-
-        .mission-subtitle {
-            font-size: 32px;
-            font-weight: 700;
-            margin-bottom: 40px;
-            color: #00ff88;
-        }
-
-        .mission-text {
-            font-size: 24px;
-            line-height: 1.6;
-            color: #ccc;
-            margin-bottom: 60px;
-        }
-
-        /* Features Grid */
-        .features-section {
-            padding: 120px 0;
-            background: #111;
-        }
-
-        .features-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 40px;
-        }
-
-        .features-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 60px;
-            margin-top: 80px;
-        }
-
-        .feature-card {
-            background: #222;
-            padding: 40px;
-            border-radius: 20px;
-            text-align: center;
-            border: 2px solid #333;
-            transition: all 0.3s;
-        }
-
-        .feature-card:hover {
-            border-color: #00ff88;
-            transform: translateY(-10px);
-        }
-
-        .feature-icon {
-            font-size: 48px;
-            margin-bottom: 20px;
-            display: block;
-        }
-
-        .feature-title {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            color: #00ff88;
-        }
-
-        .feature-desc {
-            font-size: 16px;
-            color: #ccc;
-            line-height: 1.6;
-        }
-
-        /* Testimonials */
-        .testimonials-section {
-            padding: 120px 0;
-            background: #0a0a0a;
-        }
-
-        .testimonials-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 40px;
-        }
-
-        .testimonials-title {
-            font-size: 60px;
-            font-weight: 900;
-            text-align: center;
-            margin-bottom: 20px;
-            text-transform: uppercase;
-        }
-
-        .testimonials-subtitle {
-            font-size: 24px;
-            text-align: center;
-            color: #888;
-            margin-bottom: 80px;
-        }
-
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-        }
-
-        .testimonial {
-            background: #111;
-            padding: 40px;
-            border-radius: 20px;
-            border-left: 5px solid #00ff88;
-        }
-
-        .testimonial-text {
-            font-size: 18px;
-            line-height: 1.6;
-            margin-bottom: 30px;
-            color: #fff;
-        }
-
-        .testimonial-author {
-            font-weight: 700;
-            color: #00ff88;
-            margin-bottom: 5px;
-        }
-
-        .testimonial-followers {
-            color: #888;
+            font-weight: 600;
             font-size: 14px;
         }
 
-        /* Pricing */
+        .scan-btn {
+            background: linear-gradient(135deg, #00ff88, #0088ff);
+            color: #000;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 20px;
+            font-weight: 800;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .scan-btn:hover {
+            transform: scale(1.05);
+        }
+
+        .scan-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* Popup Styles */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            backdrop-filter: blur(8px);
+        }
+
+        .popup-content {
+            background: linear-gradient(145deg, #1a1a1a, #111);
+            border-radius: 24px;
+            padding: 40px;
+            max-width: 480px;
+            text-align: center;
+            box-shadow: 0 32px 64px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            animation: popupIn 0.4s ease-out;
+        }
+
+        @keyframes popupIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .popup-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            background: none;
+            border: none;
+            color: #666;
+            font-size: 24px;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .popup-close:hover {
+            color: #fff;
+        }
+
+        .popup-title {
+            font-size: 24px;
+            font-weight: 900;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #00ff88, #0088ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .popup-subtitle {
+            font-size: 16px;
+            color: #ccc;
+            margin-bottom: 24px;
+        }
+
+        .preview-stats {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 24px 0;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .blurred-stat {
+            display: flex;
+            justify-content: space-between;
+            margin: 12px 0;
+            font-size: 14px;
+        }
+
+        .stat-label {
+            color: #ccc;
+        }
+
+        .stat-value {
+            background: linear-gradient(90deg, transparent, #333, transparent);
+            border-radius: 4px;
+            width: 60px;
+            height: 20px;
+            filter: blur(4px);
+            opacity: 0.8;
+        }
+
+        .download-btn {
+            background: linear-gradient(135deg, #00ff88, #0088ff);
+            color: #000;
+            padding: 16px 32px;
+            border: none;
+            border-radius: 24px;
+            font-weight: 900;
+            font-size: 16px;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            margin-top: 16px;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(0, 255, 136, 0.4);
+        }
+
+        /* Stats Section - Refined */
+        .stats-section {
+            padding: 80px 0;
+            background: linear-gradient(180deg, #111 0%, #0a0a0a 100%);
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .stats-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 40px;
+            padding: 0 32px;
+        }
+
+        .big-stat {
+            font-size: 64px;
+            font-weight: 900;
+            color: #00ff88;
+            line-height: 1;
+            margin-bottom: 8px;
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', sans-serif;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.6);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        /* Pricing Section - Streamlined */
         .pricing-section {
-            padding: 120px 0;
-            background: #111;
+            padding: 80px 0;
+            background: #0a0a0a;
             text-align: center;
         }
 
         .pricing-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 40px;
+            padding: 0 32px;
         }
 
         .pricing-title {
-            font-size: 60px;
+            font-size: 48px;
             font-weight: 900;
-            margin-bottom: 80px;
+            margin-bottom: 16px;
             text-transform: uppercase;
+            letter-spacing: -1px;
+        }
+
+        .pricing-subtitle {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 48px;
         }
 
         .pricing-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
+            gap: 32px;
+            margin-bottom: 48px;
         }
 
         .price-card {
-            background: #222;
-            padding: 60px 40px;
-            border-radius: 20px;
-            border: 2px solid #333;
+            background: linear-gradient(145deg, #1a1a1a, #111);
+            padding: 40px 32px;
+            border-radius: 24px;
+            border: 2px solid rgba(255, 255, 255, 0.05);
             position: relative;
-            transition: all 0.3s;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .price-card:hover {
-            border-color: #00ff88;
-            transform: translateY(-10px);
+            border-color: rgba(0, 255, 136, 0.3);
+            transform: translateY(-8px);
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.3);
         }
 
         .price-card.featured {
             border-color: #00ff88;
-            background: linear-gradient(145deg, #222, #111);
+            background: linear-gradient(145deg, #1a2a1a, #111811);
+            transform: translateY(-8px);
         }
 
         .price-card.featured::before {
             content: "MOST POPULAR";
             position: absolute;
-            top: -15px;
+            top: -12px;
             left: 50%;
             transform: translateX(-50%);
-            background: linear-gradient(45deg, #00ff88, #0088ff);
+            background: linear-gradient(135deg, #00ff88, #0088ff);
             color: #000;
-            padding: 10px 20px;
-            border-radius: 20px;
+            padding: 8px 16px;
+            border-radius: 16px;
             font-weight: 800;
-            font-size: 12px;
+            font-size: 10px;
+            letter-spacing: 1px;
         }
 
         .price-type {
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 700;
-            color: #888;
+            color: rgba(255, 255, 255, 0.6);
             text-transform: uppercase;
-            margin-bottom: 20px;
+            margin-bottom: 16px;
+            letter-spacing: 1px;
         }
 
         .price-amount {
-            font-size: 48px;
+            font-size: 40px;
             font-weight: 900;
             color: #00ff88;
-            margin-bottom: 30px;
+            margin-bottom: 24px;
+            line-height: 1;
         }
 
         .price-features {
             list-style: none;
-            margin-bottom: 40px;
+            margin-bottom: 32px;
+            text-align: left;
         }
 
         .price-features li {
-            margin-bottom: 15px;
-            font-size: 16px;
-            color: #ccc;
+            margin-bottom: 12px;
+            font-size: 15px;
+            color: rgba(255, 255, 255, 0.8);
+            padding-left: 20px;
+            position: relative;
         }
 
-        .price-cta {
-            background: linear-gradient(45deg, #00ff88, #0088ff);
+        .price-features li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #00ff88;
+            font-weight: 900;
+        }
+
+        .universal-cta {
+            background: linear-gradient(135deg, #00ff88, #0088ff);
             color: #000;
-            padding: 20px 40px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 800;
+            padding: 20px 48px;
+            border: none;
+            border-radius: 32px;
+            font-weight: 900;
             font-size: 18px;
             text-transform: uppercase;
-            transition: all 0.3s;
-            display: inline-block;
-            width: 100%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+            box-shadow: 0 8px 32px rgba(0, 255, 136, 0.3);
         }
 
-        .price-cta:hover {
-            transform: translateY(-2px);
+        .universal-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(0, 255, 136, 0.4);
         }
 
-        /* Footer */
+        /* Footer - Minimalist */
         .footer {
-            padding: 60px 0;
+            padding: 48px 0 32px;
             background: #000;
             text-align: center;
-            border-top: 1px solid #333;
-        }
-
-        .footer-container {
-            max-width: 1400px;
-            margin: 0 auto;
-            padding: 0 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .footer-text {
-            color: #888;
-            font-size: 14px;
-            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 13px;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
-        /* Responsive */
+        /* Responsive Design */
         @media (max-width: 768px) {
             .hero-container {
                 grid-template-columns: 1fr;
-                gap: 40px;
+                gap: 48px;
+                text-align: center;
             }
             
             .stats-grid,
-            .features-grid,
-            .testimonials-grid,
             .pricing-grid {
                 grid-template-columns: 1fr;
             }
             
             .nav-container {
-                padding: 0 20px;
+                padding: 0 16px;
             }
             
             .nav-links {
@@ -610,27 +687,53 @@
                 height: 560px;
             }
             
+            .camera-preview {
+                width: 160px;
+                height: 160px;
+            }
+            
             .mega-title {
-                font-size: 48px;
+                font-size: 36px;
             }
             
             .mega-subtitle {
-                font-size: 32px;
+                font-size: 24px;
             }
+            
+            .stats-bar {
+                justify-content: center;
+                gap: 24px;
+            }
+            
+            .popup-content {
+                margin: 16px;
+                padding: 24px;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* Selection styling */
+        ::selection {
+            background: rgba(0, 255, 136, 0.2);
+            color: #fff;
         }
     </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="nav">
+    <nav class="nav" id="navbar">
         <div class="nav-container">
             <div class="logo">UMAX</div>
             <ul class="nav-links">
                 <li><a href="#features">Features</a></li>
-                <li><a href="#testimonials">Reviews</a></li>
                 <li><a href="#pricing">Pricing</a></li>
+                <li><a href="#download">Download</a></li>
             </ul>
-            <a href="#pricing" class="cta-nav">GET UMAX PRO</a>
+            <a href="#download" class="cta-nav">GET UMAX PRO</a>
         </div>
     </nav>
 
@@ -663,20 +766,24 @@
                     <li>Zero Guesswork, Pure Data</li>
                 </ul>
                 
-                <a href="#pricing" class="cta-hero">GET UMAX PRO NOW</a>
-                <div class="guarantee">30 Day Money-Back Guarantee</div>
+                <a href="#download" class="cta-hero">TRY PRO ANALYSIS</a>
+                <div class="guarantee">Try the demo • Real camera access</div>
             </div>
             
             <div class="phone-container">
                 <div class="phone-mockup">
                     <div class="phone-screen">
                         <div class="scan-interface">
-                            <div class="face-scanner"></div>
-                            <div class="scan-text">
-                                <strong>FACE DETECTED</strong><br>
-                                Ready for Pro Analysis
+                            <div class="camera-preview">
+                                <video id="camera-feed" autoplay muted playsinline style="display: none;"></video>
+                                <div class="placeholder-face" id="placeholder">📷</div>
+                                <div class="face-scanner"></div>
                             </div>
-                            <button class="scan-btn" onclick="startScan()">SCAN WITH PRO</button>
+                            <div class="scan-text">
+                                <strong>FACE DETECTION READY</strong><br>
+                                <span id="status-text">Click to enable camera</span>
+                            </div>
+                            <button class="scan-btn" id="scan-button">START PRO SCAN</button>
                         </div>
                     </div>
                 </div>
@@ -685,7 +792,7 @@
     </section>
 
     <!-- Stats Section -->
-    <section class="stats-section">
+    <section class="stats-section" id="features">
         <div class="stats-grid">
             <div>
                 <div class="big-stat">2.5M+</div>
@@ -706,196 +813,291 @@
         </div>
     </section>
 
-    <!-- Mission Section -->
-    <section class="mission-section">
-        <div class="mission-container">
-            <h2 class="mission-title">PRECISE, EFFECTIVE, REVOLUTIONARY.</h2>
-            <h3 class="mission-subtitle">The New Gold Standard of Attractiveness Analysis.</h3>
-            <p class="mission-text">
-                Our mission is to create the most accurate, most effective facial analysis technology - because your glow-up journey shouldn't be guesswork. With Umax Pro, you get scientific precision, instant results, and actionable insights that actually work.
-            </p>
-            <a href="#pricing" class="cta-hero">GET UMAX PRO</a>
-        </div>
-    </section>
-
-    <!-- Features Section -->
-    <section class="features-section">
-        <div class="features-container">
-            <h2 class="mission-title" style="text-align: center; color: white;">Why 2.5M+ Choose Umax Pro</h2>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <span class="feature-icon">🎯</span>
-                    <h3 class="feature-title">98% Accuracy Rate</h3>
-                    <p class="feature-desc">Industry-leading facial analysis powered by advanced AI and computer vision technology.</p>
-                </div>
-                <div class="feature-card">
-                    <span class="feature-icon">⚡</span>
-                    <h3 class="feature-title">Instant Results</h3>
-                    <p class="feature-desc">Get comprehensive analysis and personalized recommendations in under 3 seconds.</p>
-                </div>
-                <div class="feature-card">
-                    <span class="feature-icon">👥</span>
-                    <h3 class="feature-title">Group Scanning</h3>
-                    <p class="feature-desc">Analyze multiple faces simultaneously with our revolutionary group scanning technology.</p>
-                </div>
-                <div class="feature-card">
-                    <span class="feature-icon">🔒</span>
-                    <h3 class="feature-title">100% Private</h3>
-                    <p class="feature-desc">Your data stays secure with enterprise-grade encryption and privacy protection.</p>
-                </div>
-                <div class="feature-card">
-                    <span class="feature-icon">📱</span>
-                    <h3 class="feature-title">Cross-Platform</h3>
-                    <p class="feature-desc">Available on iOS, macOS, and Apple Vision Pro with seamless synchronization.</p>
-                </div>
-                <div class="feature-card">
-                    <span class="feature-icon">🇺🇸</span>
-                    <h3 class="feature-title">Made in USA</h3>
-                    <p class="feature-desc">Developed and maintained by industry experts with the highest quality standards.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials -->
-    <section class="testimonials-section" id="testimonials">
-        <div class="testimonials-container">
-            <h2 class="testimonials-title">2.5M+ HAVE UPGRADED WITH UMAX PRO</h2>
-            <p class="testimonials-subtitle">Join the Umax Revolution - Hear from users who transformed their confidence with Pro analysis.</p>
-            
-            <div class="testimonials-grid">
-                <div class="testimonial">
-                    <h3 style="color: #00ff88; margin-bottom: 15px;">GAME-CHANGING ACCURACY</h3>
-                    <p class="testimonial-text">"I've tried every looksmax app out there. Nothing comes close to Umax Pro's precision. The AI recommendations are spot-on and actually work. This is the real deal."</p>
-                    <div class="testimonial-author">Alex Rodriguez</div>
-                    <div class="testimonial-followers">2.1M+ Followers</div>
-                </div>
-                
-                <div class="testimonial">
-                    <h3 style="color: #00ff88; margin-bottom: 15px;">TRANSFORMED MY CONFIDENCE</h3>
-                    <p class="testimonial-text">"Umax Pro showed me exactly what to improve and how. In 3 months, I went from average to getting compliments daily. The group scanning feature is incredible for tracking progress."</p>
-                    <div class="testimonial-author">Marcus Chen</div>
-                    <div class="testimonial-followers">890K+ Followers</div>
-                </div>
-                
-                <div class="testimonial">
-                    <h3 style="color: #00ff88; margin-bottom: 15px;">SCIENTIFIC PRECISION</h3>
-                    <p class="testimonial-text">"As someone in the beauty industry, I can confirm Umax Pro uses the same analysis techniques as professional consultations. It's like having a $500 consultation in your pocket."</p>
-                    <div class="testimonial-author">Sarah Kim</div>
-                    <div class="testimonial-followers">1.5M+ Followers</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pricing -->
+    <!-- Pricing Section -->
     <section class="pricing-section" id="pricing">
         <div class="pricing-container">
-            <h2 class="pricing-title">GET UMAX PRO</h2>
+            <h2 class="pricing-title">UMAX PRO FEATURES</h2>
+            <p class="pricing-subtitle">Get the complete analysis experience with professional-grade AI</p>
+            
             <div class="pricing-grid">
                 <div class="price-card">
-                    <div class="price-type">Weekly Pro</div>
+                    <div class="price-type">Weekly Access</div>
                     <div class="price-amount">$4.99</div>
                     <ul class="price-features">
-                        <li>✓ Unlimited Scans</li>
-                        <li>✓ Detailed Analysis</li>
-                        <li>✓ Group Scanning</li>
-                        <li>✓ Progress Tracking</li>
+                        <li>Unlimited Scans</li>
+                        <li>Detailed Analysis</li>
+                        <li>Progress Tracking</li>
+                        <li>Basic Recommendations</li>
                     </ul>
-                    <a href="#" class="price-cta">Start Weekly</a>
                 </div>
                 
                 <div class="price-card featured">
-                    <div class="price-type">Monthly Pro</div>
+                    <div class="price-type">Monthly Access</div>
                     <div class="price-amount">$12.99</div>
                     <ul class="price-features">
-                        <li>✓ Everything in Weekly</li>
-                        <li>✓ Advanced Recommendations</li>
-                        <li>✓ Priority Support</li>
-                        <li>✓ Export Reports</li>
-                        <li>✓ Best Value</li>
+                        <li>Everything in Weekly</li>
+                        <li>Advanced AI Analysis</li>
+                        <li>Group Scanning</li>
+                        <li>Personalized Roadmap</li>
+                        <li>Priority Support</li>
+                        <li>Export Reports</li>
                     </ul>
-                    <a href="#" class="price-cta">Get Monthly Pro</a>
                 </div>
                 
                 <div class="price-card">
                     <div class="price-type">Pro Add-Ons</div>
                     <div class="price-amount">$6.99</div>
                     <ul class="price-features">
-                        <li>✓ Supercharge Mode</li>
-                        <li>✓ 10/10 Analysis</li>
-                        <li>✓ Bonus Scans</li>
-                        <li>✓ Premium Features</li>
+                        <li>Supercharge Mode</li>
+                        <li>10/10 Potential Analysis</li>
+                        <li>Bonus Scan Credits</li>
+                        <li>Premium Insights</li>
                     </ul>
-                    <a href="#" class="price-cta">Add Supercharge</a>
                 </div>
+            </div>
+            
+            <div id="download">
+                <button class="universal-cta" onclick="redirectToApp()">DOWNLOAD UMAX PRO</button>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
     <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-text">
-                <strong>Umax Pro</strong> - The Gold Standard of Attractiveness Analysis<br>
-                © 2024 Improvement Tech LLC. All rights reserved.<br>
-                Built with Apple Vision AI • Enterprise Privacy • 30-Day Money-Back Guarantee<br><br>
-                <em>Disclaimer: Umax Pro provides appearance analysis for entertainment and self-improvement purposes only. Results are not medical advice. Individual results may vary.</em>
-            </div>
+        <div class="footer-text">
+            <strong>Umax Pro</strong> - The Gold Standard of Attractiveness Analysis<br>
+            © 2024 Improvement Tech LLC. All rights reserved. Built with Apple Vision AI • Enterprise Privacy<br><br>
+            <em>Disclaimer: Umax Pro provides appearance analysis for entertainment and self-improvement purposes only. Results are not medical advice.</em>
         </div>
     </footer>
 
+    <!-- Popup -->
+    <div class="popup-overlay" id="popup">
+        <div class="popup-content">
+            <button class="popup-close" onclick="closePopup()">&times;</button>
+            <div class="popup-title">ANALYSIS COMPLETE!</div>
+            <div class="popup-subtitle">Your Pro results are ready. Download the app to unlock your full analysis.</div>
+            
+            <div class="preview-stats">
+                <div class="blurred-stat">
+                    <span class="stat-label">Overall Attractiveness:</span>
+                    <div class="stat-value"></div>
+                </div>
+                <div class="blurred-stat">
+                    <span class="stat-label">Facial Symmetry:</span>
+                    <div class="stat-value"></div>
+                </div>
+                <div class="blurred-stat">
+                    <span class="stat-label">Jawline Score:</span>
+                    <div class="stat-value"></div>
+                </div>
+                <div class="blurred-stat">
+                    <span class="stat-label">Eye Area Rating:</span>
+                    <div class="stat-value"></div>
+                </div>
+                <div class="blurred-stat">
+                    <span class="stat-label">Improvement Potential:</span>
+                    <div class="stat-value"></div>
+                </div>
+            </div>
+            
+            <p id="device-message" style="color: #ccc; margin: 16px 0; font-size: 14px;"></p>
+            <button class="download-btn" onclick="redirectToApp()">DOWNLOAD UMAX PRO</button>
+        </div>
+    </div>
+
     <script>
-        function startScan() {
-            const btn = document.querySelector('.scan-btn');
+        // Device Detection
+        function detectDevice() {
+            const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+            
+            if (/android/i.test(userAgent)) {
+                return 'android';
+            }
+            
+            if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                return 'ios';
+            }
+            
+            if (/windows phone/i.test(userAgent)) {
+                return 'windows';
+            }
+            
+            return 'desktop';
+        }
+
+        // Camera Management
+        let stream = null;
+        let isScanning = false;
+
+        async function initCamera() {
+            const video = document.getElementById('camera-feed');
+            const placeholder = document.getElementById('placeholder');
+            const button = document.getElementById('scan-button');
+            const statusText = document.getElementById('status-text');
+            
+            try {
+                stream = await navigator.mediaDevices.getUserMedia({ 
+                    video: { 
+                        width: { ideal: 640 }, 
+                        height: { ideal: 640 },
+                        facingMode: 'user'
+                    } 
+                });
+                
+                video.srcObject = stream;
+                video.style.display = 'block';
+                placeholder.style.display = 'none';
+                statusText.textContent = 'Camera active • Ready to scan';
+                button.textContent = 'ANALYZE FACE';
+                button.disabled = false;
+                
+            } catch (error) {
+                console.error('Camera access denied:', error);
+                statusText.textContent = 'Camera access needed for demo';
+                button.textContent = 'ENABLE CAMERA';
+            }
+        }
+
+        // Scanning Process
+        async function startScan() {
+            const button = document.getElementById('scan-button');
+            const statusText = document.getElementById('status-text');
             const scanner = document.querySelector('.face-scanner');
             
-            btn.textContent = 'SCANNING...';
-            btn.style.background = 'linear-gradient(45deg, #ff6b00, #ff0066)';
-            scanner.style.borderColor = '#ff6b00';
+            if (!stream && !isScanning) {
+                await initCamera();
+                return;
+            }
             
+            if (isScanning) return;
+            
+            isScanning = true;
+            button.disabled = true;
+            button.textContent = 'SCANNING...';
+            statusText.textContent = 'Analyzing facial features...';
+            scanner.style.borderColor = '#ff6b00';
+            scanner.style.animationDuration = '1s';
+            
+            // Simulate scanning process
             setTimeout(() => {
-                btn.textContent = 'ANALYSIS COMPLETE!';
-                btn.style.background = 'linear-gradient(45deg, #00ff88, #0088ff)';
-                scanner.style.borderColor = '#00ff88';
+                button.textContent = 'PROCESSING...';
+                statusText.textContent = 'Calculating attractiveness metrics...';
+                scanner.style.borderColor = '#0088ff';
                 
                 setTimeout(() => {
-                    btn.textContent = 'SCAN WITH PRO';
-                    btn.style.background = 'linear-gradient(45deg, #00ff88, #0088ff)';
-                }, 2000);
+                    button.textContent = 'ANALYSIS COMPLETE!';
+                    statusText.textContent = 'Results ready';
+                    scanner.style.borderColor = '#00ff88';
+                    scanner.style.animationDuration = '2.5s';
+                    
+                    setTimeout(() => {
+                        showPopup();
+                        resetScanButton();
+                    }, 1000);
+                }, 2500);
             }, 3000);
         }
 
-        // Smooth scrolling
+        function resetScanButton() {
+            const button = document.getElementById('scan-button');
+            const statusText = document.getElementById('status-text');
+            
+            setTimeout(() => {
+                button.textContent = stream ? 'ANALYZE FACE' : 'START PRO SCAN';
+                statusText.textContent = stream ? 'Camera active • Ready to scan' : 'Click to enable camera';
+                button.disabled = false;
+                isScanning = false;
+            }, 2000);
+        }
+
+        // Popup Management
+        function showPopup() {
+            const popup = document.getElementById('popup');
+            const deviceMessage = document.getElementById('device-message');
+            const device = detectDevice();
+            
+            let message = '';
+            if (device === 'desktop') {
+                message = '💻 You\'re on desktop. To get your results, open this page on your smartphone and download the app.';
+            } else {
+                message = '📱 Perfect! Click below to download Umax Pro and unlock your complete analysis.';
+            }
+            
+            deviceMessage.textContent = message;
+            popup.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closePopup() {
+            const popup = document.getElementById('popup');
+            popup.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+
+        // App Store Redirect
+        function redirectToApp() {
+            const device = detectDevice();
+            
+            switch (device) {
+                case 'ios':
+                    window.open('https://apps.apple.com/us/app/umax-become-hot/id6471026798', '_blank');
+                    break;
+                case 'android':
+                    window.open('https://play.google.com/store/apps/details?id=com.umax.tech&hl=en_US', '_blank');
+                    break;
+                default:
+                    // Desktop - show instructions
+                    alert('📱 To download Umax Pro:\n\n1. Open this page on your smartphone\n2. Or search "Umax Become Hot" in your app store\n3. Download and unlock your analysis results!');
+            }
+        }
+
+        // Navigation Scroll Effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Smooth Scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
             });
         });
 
-        // Animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+        // Event Listeners
+        document.getElementById('scan-button').addEventListener('click', startScan);
+        
+        // Close popup on outside click
+        document.getElementById('popup').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closePopup();
+            }
+        });
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
+        // Cleanup camera stream on page unload
+        window.addEventListener('beforeunload', () => {
+            if (stream) {
+                stream.getTracks().forEach(track => track.stop());
+            }
+        });
 
-        document.querySelectorAll('.feature-card, .testimonial, .price-card').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(30px)';
-            el.style.transition = 'all 0.6s ease';
-            observer.observe(el);
+        // Keyboard shortcuts
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closePopup();
+            }
         });
     </script>
 </body>
