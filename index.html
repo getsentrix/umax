@@ -207,7 +207,7 @@
         }
 
         .features-list li::before {
-            content: "✓";
+            content: "âœ“";
             position: absolute;
             left: 0;
             color: #00ff88;
@@ -1000,6 +1000,41 @@
             background: rgba(0, 255, 136, 0.2);
             color: #fff;
         }
+
+        /* === UMAX SLIDER (BasedBodyworks aesthetic) === */
+.features-slider-section{padding:120px 0;background:linear-gradient(180deg,#111 0%,#0a0a0a 100%);border-top:1px solid rgba(255,255,255,.05)}
+.features-slider-container{max-width:1440px;margin:0 auto;padding:0 32px;text-align:center}
+.features-slider-title{font-size:48px;font-weight:900;margin-bottom:16px;text-transform:uppercase;letter-spacing:-1px}
+.features-slider-subtitle{font-size:18px;color:rgba(255,255,255,.7);margin-bottom:80px}
+.slider-wrapper{overflow:hidden;position:relative}
+.slider-track{display:flex;transition:transform .7s cubic-bezier(.4,0,.2,1)}
+.slide{min-width:100%;position:relative;height:360px;display:flex;align-items:center;justify-content:center}
+@media(max-width:600px){.slide{height:300px}}
+.slide-bg{position:absolute;inset:0;background:radial-gradient(circle at top left,rgba(0,255,136,.2),transparent 60%),radial-gradient(circle at bottom right,rgba(0,136,255,.2),transparent 60%);filter:blur(80px);z-index:1}
+.slide-content{position:relative;z-index:2;color:#fff;text-align:center;padding:0 24px;animation:fadeInUp .6s ease-out both}
+.slide-heading{font-size:clamp(24px,5vw,36px);font-weight:900;text-transform:uppercase;margin-bottom:16px}
+.result-grid,.suggestion-grid,.rating-grid{display:grid;gap:12px}
+.result-grid{grid-template-columns:repeat(auto-fit,minmax(120px,1fr))}
+.suggestion-grid{grid-template-columns:1fr}
+.rating-grid{grid-template-columns:repeat(3,1fr)}
+.result-card,.suggestion-card,.rating-card{background:rgba(255,255,255,.1);border-radius:16px;padding:16px;backdrop-filter:blur(12px);transition:transform .3s,box-shadow .3s}
+.result-card:hover,.suggestion-card:hover,.rating-card:hover{transform:scale(1.05);box-shadow:0 12px 24px rgba(0,255,136,.3)}
+.suggestion-card{position:relative}
+.suggestion-card .icon{width:12px;height:12px;border-radius:50%;position:absolute;top:16px;left:16px}
+.suggestion-card .icon.yellow{background:#ffc107}
+.suggestion-card .icon.blue{background:#0088ff}
+.suggestion-card h4{margin-left:36px;margin-bottom:8px}
+.rating-card{text-align:center}
+.rating-card .label{font-size:12px;color:rgba(255,255,255,.7)}
+.rating-card .score{font-size:28px;font-weight:900;margin:8px 0}
+.chat-window{background:rgba(255,255,255,.05);border-radius:16px;padding:16px;display:grid;gap:12px}
+.bot-message{padding:12px;background:rgba(0,255,136,.1);border-radius:12px;font-size:14px}
+.user-message{padding:12px;background:rgba(0,136,255,.1);color:#fff;justify-self:end;border-radius:12px;font-size:14px}
+.slider-dots{position:absolute;bottom:12px;left:50%;transform:translateX(-50%);display:flex;gap:8px}
+.dot{width:12px;height:12px;border-radius:50%;background:rgba(255,255,255,.3);border:none;cursor:pointer;transition:all .3s}
+.dot.active{background:#00ff88;transform:scale(1.2)}
+@keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+
     </style>
 </head>
 <body>
@@ -1046,7 +1081,7 @@
                 </ul>
                 
                 <a href="#download" class="cta-hero">TRY PRO ANALYSIS</a>
-                <div class="guarantee">Try the demo • Real camera access</div>
+                <div class="guarantee">Try the demo â€¢ Real camera access</div>
             </div>
             
             <div class="phone-container">
@@ -1055,7 +1090,7 @@
                         <div class="scan-interface">
                             <div class="camera-preview">
                                 <video id="camera-feed" autoplay muted playsinline style="display: none;"></video>
-                                <div class="placeholder-face" id="placeholder">📷</div>
+                                <div class="placeholder-face" id="placeholder">ðŸ“·</div>
                                 <div class="face-scanner"></div>
                             </div>
                             <div class="scan-text">
@@ -1070,160 +1105,82 @@
         </div>
     </section>
 
-    <!-- Features Slider Section -->
-    <section class="features-slider-section" id="features">
-        <div class="features-slider-container">
-            <h2 class="features-slider-title">WHAT YOU GET WITH UMAX PRO</h2>
-            <p class="features-slider-subtitle">Experience the complete Umax Pro analysis and improvement system</p>
-            
-            <div class="slider-container">
-                <div class="slider-content">
-                    <div class="slider-nav">
-                        <div class="nav-dot active" onclick="showSlide(0)"></div>
-                        <div class="nav-dot" onclick="showSlide(1)"></div>
-                        <div class="nav-dot" onclick="showSlide(2)"></div>
-                        <div class="nav-dot" onclick="showSlide(3)"></div>
-                    </div>
-                    
-                    <div id="slide-0" class="slide-content active">
-                        <h3 class="slider-title">Learn about yourself</h3>
-                        <p class="slider-description">Get detailed analysis of your facial features with precise measurements and characteristics. Discover your canthal tilt, face shape, eye shape, and more with professional-grade AI analysis.</p>
-                    </div>
-                    
-                    <div id="slide-1" class="slide-content" style="display: none;">
-                        <h3 class="slider-title">Start improving</h3>
-                        <p class="slider-description">Receive personalized improvement suggestions tailored to your unique features. From skincare routines to styling tips based on your face shape, get actionable advice that works.</p>
-                    </div>
-                    
-                    <div id="slide-2" class="slide-content" style="display: none;">
-                        <h3 class="slider-title">Get your ratings</h3>
-                        <p class="slider-description">See your comprehensive attractiveness scores across multiple categories. Track your overall rating, potential, jawline, masculinity, skin quality, and cheekbones with precise numerical data.</p>
-                    </div>
-                    
-                    <div id="slide-3" class="slide-content" style="display: none;">
-                        <h3 class="slider-title">Improvement coach</h3>
-                        <p class="slider-description">Chat with your personal AI improvement coach for customized advice. Get answers to specific questions about becoming more attractive and receive guided recommendations.</p>
-                    </div>
-                </div>
-                
-                <div class="app-mockup">
-                    <div class="app-screen">
-                        <div class="app-header">
-                            <div class="app-title">LEVEL UP</div>
-                            <div class="app-subtitle">Proven to help you max your looks.</div>
-                        </div>
-                        
-                        <div class="app-content">
-                            <!-- Screen 1: Learn about yourself -->
-                            <div class="analysis-results active" id="screen-0">
-                                <h3 style="color: #fff; margin-bottom: 24px; text-align: center;">Learn about yourself</h3>
-                                <div class="result-item">
-                                    <span class="result-label">Canthal Tilt</span>
-                                    <span class="result-value">Positive</span>
-                                </div>
-                                <div class="result-item">
-                                    <span class="result-label">Face Shape</span>
-                                    <span class="result-value">Diamond</span>
-                                </div>
-                                <div class="result-item">
-                                    <span class="result-label">Eye Shape</span>
-                                    <span class="result-value">Almond</span>
-                                </div>
-                            </div>
-                            
-                            <!-- Screen 2: Start improving -->
-                            <div class="improvement-suggestions" id="screen-1">
-                                <h3 style="color: #fff; margin-bottom: 24px; text-align: center;">Start improving</h3>
-                                <div class="suggestion-item">
-                                    <div class="suggestion-icon yellow"></div>
-                                    <div class="suggestion-title">Start a skincare routine</div>
-                                    <div class="suggestion-desc">Skincare routines are crucial for a clear, healthy face. Tap to learn more.</div>
-                                    <div class="suggestion-arrow">›</div>
-                                </div>
-                                <div class="suggestion-item">
-                                    <div class="suggestion-icon blue"></div>
-                                    <div class="suggestion-title">Diamond face styling</div>
-                                    <div class="suggestion-desc">You have a diamond face shape... let's teach you how to style it!</div>
-                                    <div class="suggestion-arrow">›</div>
-                                </div>
-                            </div>
-                            
-                            <!-- Screen 3: Get your ratings -->
-                            <div class="ratings-grid" id="screen-2">
-                                <div class="rating-card">
-                                    <div class="rating-label">Overall</div>
-                                    <div class="rating-score">68</div>
-                                    <div class="rating-bar">
-                                        <div class="rating-progress orange" style="width: 68%;"></div>
-                                    </div>
-                                </div>
-                                <div class="rating-card">
-                                    <div class="rating-label">Potential</div>
-                                    <div class="rating-score">91</div>
-                                    <div class="rating-bar">
-                                        <div class="rating-progress green" style="width: 91%;"></div>
-                                    </div>
-                                </div>
-                                <div class="rating-card">
-                                    <div class="rating-label">Jawline</div>
-                                    <div class="rating-score">56</div>
-                                    <div class="rating-bar">
-                                        <div class="rating-progress orange" style="width: 56%;"></div>
-                                    </div>
-                                </div>
-                                <div class="rating-card">
-                                    <div class="rating-label">Masculinity</div>
-                                    <div class="rating-score">81</div>
-                                    <div class="rating-bar">
-                                        <div class="rating-progress green" style="width: 81%;"></div>
-                                    </div>
-                                </div>
-                                <div class="rating-card">
-                                    <div class="rating-label">Skin quality</div>
-                                    <div class="rating-score">65</div>
-                                    <div class="rating-bar">
-                                        <div class="rating-progress orange" style="width: 65%;"></div>
-                                    </div>
-                                </div>
-                                <div class="rating-card">
-                                    <div class="rating-label">Cheekbones</div>
-                                    <div class="rating-score">76</div>
-                                    <div class="rating-bar">
-                                        <div class="rating-progress yellow" style="width: 76%;"></div>
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <!-- Screen 4: Improvement coach -->
-                            <div class="coach-chat" id="screen-3">
-                                <h3 style="color: #fff; margin-bottom: 24px; text-align: center;">Improvement coach</h3>
-                                <div class="chat-message">
-                                    What's up! I'm your personal self improvement coach. What are you looking to learn?
-                                </div>
-                                <div class="chat-message user-message">
-                                    How do I become more attractive?
-                                </div>
-                                <div class="chat-message">
-                                    Becoming more attractive includes a few different steps. You can start by...
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <div class="app-footer">
-                            <div class="scans-completed">1,000,000 scans completed</div>
-                            <button class="unlock-btn">Unlock now 🙌</button>
-                            <div class="trial-text">3-day free trial, then $3.99 per week</div>
-                            <div class="legal-links">
-                                <span>Terms of Use</span>
-                                <span>Restore Purchase</span>
-                                <span>Privacy Policy</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+   <!-- === UMAX SLIDER (replaces old features section) === -->
+<section class="features-slider-section" id="features">
+  <div class="features-slider-container">
+    <h2 class="features-slider-title">WHAT YOU GET WITH UMAX PRO</h2>
+    <p class="features-slider-subtitle">Experience the complete Umax Pro system</p>
+    <div class="slider-wrapper">
+      <div class="slider-track">
+        <!-- Slide 1 -->
+        <div class="slide slide-1 active">
+          <div class="slide-bg"></div>
+          <div class="slide-content">
+            <h3 class="slide-heading">Learn about yourself</h3>
+            <div class="result-grid">
+              <div class="result-card"><span class="label">Canthal Tilt</span><span class="value">Positive</span></div>
+              <div class="result-card"><span class="label">Face Shape</span><span class="value">Diamond</span></div>
+              <div class="result-card"><span class="label">Eye Shape</span><span class="value">Almond</span></div>
             </div>
+          </div>
         </div>
-    </section>
+        <!-- Slide 2 -->
+        <div class="slide slide-2">
+          <div class="slide-bg"></div>
+          <div class="slide-content">
+            <h3 class="slide-heading">Start improving</h3>
+            <div class="suggestion-grid">
+              <div class="suggestion-card">
+                <div class="icon yellow"></div>
+                <h4>Start a skincare routine</h4>
+                <p>Skincare routines are crucial for a clear, healthy face.</p>
+              </div>
+              <div class="suggestion-card">
+                <div class="icon blue"></div>
+                <h4>Diamond face styling</h4>
+                <p>Learn how to style your diamond face shape for maximum impact.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Slide 3 -->
+        <div class="slide slide-3">
+          <div class="slide-bg"></div>
+          <div class="slide-content">
+            <h3 class="slide-heading">Get your ratings</h3>
+            <div class="rating-grid">
+              <div class="rating-card"><span class="label">Overall</span><span class="score">68</span></div>
+              <div class="rating-card"><span class="label">Potential</span><span class="score">91</span></div>
+              <div class="rating-card"><span class="label">Jawline</span><span class="score">56</span></div>
+              <div class="rating-card"><span class="label">Masculinity</span><span class="score">81</span></div>
+              <div class="rating-card"><span class="label">Skin quality</span><span class="score">65</span></div>
+              <div class="rating-card"><span class="label">Cheekbones</span><span class="score">76</span></div>
+            </div>
+          </div>
+        </div>
+        <!-- Slide 4 -->
+        <div class="slide slide-4">
+          <div class="slide-bg"></div>
+          <div class="slide-content">
+            <h3 class="slide-heading">Improvement coach</h3>
+            <div class="chat-window">
+              <div class="bot-message">What's up! I'm your self-improvement coach.</div>
+              <div class="user-message">How do I become more attractive?</div>
+              <div class="bot-message">Start by focusing on symmetry and skin health. I'll guide you step by step.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slider-dots">
+        <button class="dot active" data-slide="0"></button>
+        <button class="dot" data-slide="1"></button>
+        <button class="dot" data-slide="2"></button>
+        <button class="dot" data-slide="3"></button>
+      </div>
+    </div>
+  </div>
+</section>
+
 
     <!-- Stats Section -->
     <section class="stats-section">
@@ -1241,7 +1198,7 @@
                 <div class="stat-label">Accuracy Rate</div>
             </div>
             <div>
-                <div class="big-stat">4.9★</div>
+                <div class="big-stat">4.9â˜…</div>
                 <div class="stat-label">App Store Rating</div>
             </div>
         </div>
@@ -1264,13 +1221,13 @@
             <div style="text-align: left; max-width: 600px; margin: 0 auto;">
                 <h3 style="color: #00ff88; margin-bottom: 20px; font-size: 24px;">What's included:</h3>
                 <ul style="color: rgba(255, 255, 255, 0.8); font-size: 16px; line-height: 2;">
-                    <li>✓ Unlimited facial scans and analysis</li>
-                    <li>✓ Detailed attractiveness ratings (Overall, Jawline, Masculinity, etc.)</li>
-                    <li>✓ Personalized improvement recommendations</li>
-                    <li>✓ Group scanning technology</li>
-                    <li>✓ AI improvement coach chat</li>
-                    <li>✓ Progress tracking and history</li>
-                    <li>✓ Premium skincare and styling guides</li>
+                    <li>âœ“ Unlimited facial scans and analysis</li>
+                    <li>âœ“ Detailed attractiveness ratings (Overall, Jawline, Masculinity, etc.)</li>
+                    <li>âœ“ Personalized improvement recommendations</li>
+                    <li>âœ“ Group scanning technology</li>
+                    <li>âœ“ AI improvement coach chat</li>
+                    <li>âœ“ Progress tracking and history</li>
+                    <li>âœ“ Premium skincare and styling guides</li>
                 </ul>
             </div>
             
@@ -1284,7 +1241,7 @@
     <footer class="footer">
         <div class="footer-text">
             <strong>Umax Pro</strong> - The Gold Standard of Attractiveness Analysis<br>
-            © 2024 Improvement Tech LLC. All rights reserved. Built with Apple Vision AI • Enterprise Privacy<br><br>
+            Â© 2024 Improvement Tech LLC. All rights reserved. Built with Apple Vision AI â€¢ Enterprise Privacy<br><br>
             <em>Disclaimer: Umax Pro provides appearance analysis for entertainment and self-improvement purposes only. Results are not medical advice.</em>
         </div>
     </footer>
@@ -1321,7 +1278,7 @@
             
             <p id="device-message" style="color: #ccc; margin: 16px 0; font-size: 14px;"></p>
             <div style="background: rgba(0, 255, 136, 0.1); border-radius: 12px; padding: 16px; margin: 16px 0; border: 1px solid rgba(0, 255, 136, 0.3);">
-                <div style="color: #00ff88; font-weight: 700; margin-bottom: 8px;">🎉 3-Day Free Trial</div>
+                <div style="color: #00ff88; font-weight: 700; margin-bottom: 8px;">ðŸŽ‰ 3-Day Free Trial</div>
                 <div style="color: #ccc; font-size: 14px;">Try all Pro features free for 3 days, then $3.99/week</div>
             </div>
             <button class="download-btn" onclick="redirectToApp()">START FREE TRIAL</button>
@@ -1404,7 +1361,7 @@
                 video.srcObject = stream;
                 video.style.display = 'block';
                 placeholder.style.display = 'none';
-                statusText.textContent = 'Camera active • Ready to scan';
+                statusText.textContent = 'Camera active â€¢ Ready to scan';
                 button.textContent = 'ANALYZE FACE';
                 button.disabled = false;
                 
@@ -1461,7 +1418,7 @@
             
             setTimeout(() => {
                 button.textContent = stream ? 'ANALYZE FACE' : 'START PRO SCAN';
-                statusText.textContent = stream ? 'Camera active • Ready to scan' : 'Click to enable camera';
+                statusText.textContent = stream ? 'Camera active â€¢ Ready to scan' : 'Click to enable camera';
                 button.disabled = false;
                 isScanning = false;
             }, 2000);
@@ -1475,9 +1432,9 @@
             
             let message = '';
             if (device === 'desktop') {
-                message = '💻 You\'re on desktop. To get your results, open this page on your smartphone and download the app.';
+                message = 'ðŸ’» You\'re on desktop. To get your results, open this page on your smartphone and download the app.';
             } else {
-                message = '📱 Perfect! Click below to start your 3-day free trial and unlock your complete analysis.';
+                message = 'ðŸ“± Perfect! Click below to start your 3-day free trial and unlock your complete analysis.';
             }
             
             deviceMessage.textContent = message;
@@ -1504,7 +1461,7 @@
                     break;
                 default:
                     // Desktop - show instructions
-                    alert('📱 To start your 3-day free trial:\n\n1. Open this page on your smartphone\n2. Or search "Umax Become Hot" in your app store\n3. Download and start your free trial!\n\nAfter 3 days: $3.99/week');
+                    alert('ðŸ“± To start your 3-day free trial:\n\n1. Open this page on your smartphone\n2. Or search "Umax Become Hot" in your app store\n3. Download and start your free trial!\n\nAfter 3 days: $3.99/week');
             }
         }
 
@@ -1558,6 +1515,19 @@
 
         // Initialize first slide
         showSlide(0);
+        
+        // === Slider logic (dots + swipe + auto-advance) ===
+const track=document.querySelector('.slider-track');
+const dots=document.querySelectorAll('.dot');
+let currentIndex=0; const total=dots.length;
+function goToSlide(i){ currentIndex=i; track.style.transform=`translateX(-${100*i}%)`; dots.forEach(d=>d.classList.toggle('active',+d.dataset.slide===i)); }
+dots.forEach(d=>d.addEventListener('click',()=>goToSlide(+d.dataset.slide)));
+let startX=0,deltaX=0;
+track.addEventListener('touchstart',e=>startX=e.touches[0].clientX);
+track.addEventListener('touchmove',e=>deltaX=e.touches[0].clientX-startX);
+track.addEventListener('touchend',()=>{ if(deltaX<-50&&currentIndex<total-1)goToSlide(currentIndex+1); if(deltaX>50&&currentIndex>0)goToSlide(currentIndex-1); deltaX=0; });
+setInterval(()=>goToSlide((currentIndex+1)%total),5000);
+        
     </script>
 </body>
 </html>
